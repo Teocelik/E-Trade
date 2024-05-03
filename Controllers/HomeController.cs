@@ -1,4 +1,6 @@
-﻿using E_Trade.Models;
+﻿
+using E_Trade.DataAccess;
+using E_Trade.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +13,19 @@ namespace E_Trade.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AppDbContext _appDbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
         {
             _logger = logger;
+            _appDbContext = appDbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = _appDbContext.Products.ToList();
+            return View(products);
         }
 
         public IActionResult Privacy()
