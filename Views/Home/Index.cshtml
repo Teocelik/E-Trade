@@ -1,8 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Kutucukları daha geniş yapmak için 150px kullanabilirsiniz */
+            gap: 20px;
+        }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+        .product-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            height: auto; /* Kutucukların yüksekliğini ayarlayabilirsiniz */
+        }
+
+            .product-box:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .product-box img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .product-box h3 {
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            .product-box p {
+                margin: 5px 0;
+            }
+    </style>
+</head>
+<body>
+    <div class="product-list">
+        @foreach (var product in Model)
+        {
+            <button class="product-box" data-product-id ="@product.Id">
+                <img src="@product.ImageUrl" alt="@product.Title">
+                <h3>@product.Title</h3>
+                <p>Fiyat: @product.Price</p>
+                <p>Değerlendirme: @product.RatingRate</p>
+            </button>
+        }
+    </div>
+</body>
+</html>
+<script>
+    //Tüm HTML sayfası yüklendiğinde...
+    document.addEventListener('DOMContentLoaded', function () {
+        // Her product-box elementine tıklama olayını dinle
+        document.querySelectorAll('.product-box').forEach(function (productBox) {
+            productBox.addEventListener('click', function () {
+                // Tıklanan ürünün ID'sini al
+                var productId = this.getAttribute('data-product-id');
+
+                // Ürünün detay sayfasına yönlendirme
+                var detailUrl = '/Product/Details?id=' + productId;
+                window.location.href = detailUrl;
+            });
+        });
+    });
+</script>

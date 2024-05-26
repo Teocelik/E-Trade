@@ -1,5 +1,9 @@
 using E_Trade.DataAccess;
 using E_Trade.DataAccess;
+using E_Trade.DataAccess.Repositories;
+using E_Trade.Models;
+using E_Trade.Services.Implementations;
+using E_Trade.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,9 +30,16 @@ namespace E_Trade
        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();//Mvc dizayn pattern
+
+            //Database connection
             services.AddDbContext<AppDbContext>(options => options.
             UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+
+
+            services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<IProductService, ProductServices>();
+
         }
 
         
@@ -53,9 +64,7 @@ namespace E_Trade
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

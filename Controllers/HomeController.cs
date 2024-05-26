@@ -1,6 +1,7 @@
 ﻿
 using E_Trade.DataAccess;
 using E_Trade.Models;
+using E_Trade.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,18 +14,18 @@ namespace E_Trade.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IProductService _productServices;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext)
+        public HomeController(ILogger<HomeController> logger, IProductService productServices)
         {
             _logger = logger;
-            _appDbContext = appDbContext;
+            _productServices = productServices;
         }
 
         public IActionResult Index()
         {
-            var products = _appDbContext.Products.ToList();
+            var products = _productServices.GetProducts();
             return View(products);
         }
 
