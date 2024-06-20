@@ -2,6 +2,7 @@ using E_Trade.DataAccess;
 using E_Trade.DataAccess;
 using E_Trade.DataAccess.Repositories;
 using E_Trade.Models;
+using E_Trade.Services.Concrete;
 using E_Trade.Services.Implementations;
 using E_Trade.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +40,10 @@ namespace E_Trade
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IProductService, ProductServices>();
+            services.AddScoped<ICartService, CartService>();
+
+            services.AddHttpContextAccessor();
+            services.AddSession();
 
         }
 
@@ -59,6 +64,8 @@ namespace E_Trade
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

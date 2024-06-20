@@ -18,7 +18,8 @@ namespace E_Trade.Controllers
         // GET: ProductController
         public ActionResult Index()
         {
-            return View();
+            var products = _productService.GetProducts();
+            return View(products);
         }
 
         // GET: ProductController/Details/5
