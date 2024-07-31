@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-6">
             <h4>@Model.Title</h4>
-            <p><strong>Price:</strong> $@Model.Price</p>
+            <p><strong>Price:</strong> $@Model.Price.ToString("c")</p>
             <p><strong>Description:</strong> @Model.Description</p>
             <p><strong>Category:</strong> @Model.Category</p>
             <p><strong>Rating:</strong> @Model.RatingRate (from @Model.RatingCount reviews)</p>
@@ -31,11 +31,11 @@
                     <input type="hidden" name="productId" value="@Model.Id" />
                     <input type="hidden" name="quantity" value="1" />
                     <div class="btn-group" role="group">
-                        <button type="submit" class="btn btn-success">Add to Basket</button>
+                        <button type="submit" class="btn btn-success">Sepete ekle</button>
                     </div>
                 </form>
             }
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            <a asp-action="Index" class="btn btn-secondary">Anasayfa</a>
         </div>
     </div>
 </div>

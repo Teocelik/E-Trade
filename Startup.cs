@@ -1,5 +1,4 @@
 using E_Trade.DataAccess;
-using E_Trade.DataAccess;
 using E_Trade.DataAccess.Repositories;
 using E_Trade.Models;
 using E_Trade.Services.Concrete;
@@ -14,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,6 +42,9 @@ namespace E_Trade
             services.AddScoped<IProductService, ProductServices>();
             services.AddScoped<ICartService, CartService>();
 
+
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+
             services.AddHttpContextAccessor();
             services.AddSession();
 
@@ -68,6 +71,25 @@ namespace E_Trade
             app.UseSession();
 
             app.UseAuthorization();
+
+            #region Kültür ayarlarýný yapýlandýrma
+
+            /*ASP.NET Core, çok dilli ve çok kültürlü uygulamalar oluþturmayý kolaylaþtýran güçlü yerelleþtirme ve kültür desteði saðlar.
+              RequestLocalizationOptions sýnýfý, desteklenen kültürleri ve dilleri belirlemenize olanak tanýr.
+              UseRequestLocalization middleware'i, uygulamanýzýn isteklerin kültür bilgilerini kullanarak doðru þekilde yanýt vermesini saðlar.*/
+
+            var supportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("tr-TR") };
+
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en-US"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            };
+
+            app.UseRequestLocalization(localizationOptions);
+
+            #endregion
 
             app.UseEndpoints(endpoints =>
             {

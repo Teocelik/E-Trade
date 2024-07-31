@@ -1,4 +1,4 @@
-﻿<h2>Your Cart</h2>
+﻿<h2>Sepetim</h2>
 
 <table class="table">
     <thead>
@@ -17,11 +17,11 @@
                 <td>@item.Product.Title</td>
                 <td>@item.Quantity</td>
                 <td>@item.Product.Price.ToString("c")</td>
-                <td>@(item.Product.Price * item.Quantity).ToString("c")</td>
+                <td>@(item.Product.Price * item.Quantity)</td>
                 <td>
                     <form asp-action="RemoveFromCart" method="post">
                         <input type="hidden" name="productId" value="@item.ProductId" />
-                        <button type="submit" class="btn btn-danger">Remove</button>
+                        <button type="submit" class="btn btn-danger">Sil</button>
                     </form>
                 </td>
             </tr>
@@ -32,5 +32,19 @@
 <p>Total Price: @Model.TotalPrice.ToString("c")</p>
 
 <form asp-action="ClearCart" method="post">
-    <button type="submit" class="btn btn-danger">Clear Cart</button>
+    <button type="submit" class="btn btn-danger">Sepeti temizle</button>
 </form>
+
+<style>
+    .text-center {
+        text-align: center;
+        margin-top: 20px; /* İsteğe bağlı: Üstten biraz boşluk bırakır */
+    }
+
+</style>
+
+<div class="text-center">
+    <form asp-action="CheckOut" method="post">
+        <button type="submit" class="btn btn-success">Ödeme Yap</button>
+    </form>
+</div>

@@ -26,5 +26,17 @@ namespace E_Trade.Models
                 });
             }
         }
+
+        //Id'ye göre ürün silen method.
+        public void RemoveId(int productId)
+        {
+            Items.RemoveAll(i => i.ProductId == productId);
+        }
+
+        //Sepetteki toplam tutarı hesaplayan property
+        public decimal TotalPrice => Items.Sum(i => i.Product.Price * i.Quantity);
+
+        //Sepetteki toplam ürün miktarını tutar.
+        public int TotalItemCount => Items.Sum(i => i.Quantity);
     }
 }

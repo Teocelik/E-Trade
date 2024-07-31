@@ -46,7 +46,7 @@
             <button class="product-box" data-product-id ="@product.Id">
                 <img src="@product.ImageUrl" alt="@product.Title">
                 <h3>@product.Title</h3>
-                <p>Fiyat: @product.Price</p>
+                <p>Fiyat: @product.Price.ToString("c")</p>
                 <p>Değerlendirme: @product.RatingRate</p>
             </button>
         }

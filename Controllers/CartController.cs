@@ -33,5 +33,10 @@ namespace E_Trade.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult CheckOut()
+        {
+            return RedirectToAction("CheckOut", "CheckOut");
+        }
     }
 }
