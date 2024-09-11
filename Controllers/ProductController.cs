@@ -7,6 +7,9 @@ namespace E_Trade.Controllers
 {
     public class ProductController : Controller
     {
+        /*Hizmeti Kullanma:
+          Artık, IProductService arayüzünü bir denetleyici (Controller) içerisine enjekte edebiliriz. 
+        ASP.NET Core, bağımlılığı otomatik olarak çözecek ve uygun sınıfı enjekte edecektir.*/
         private readonly IProductService _productService;
 
         public ProductController(IProductService productService)

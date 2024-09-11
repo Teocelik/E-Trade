@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace E_Trade.Services.Implementations
 {
+    /*Hizmet(Service) Implemente etme(Somutlaştırma)*/
     public class ProductServices : IProductService
     {
         private readonly IRepository<Product> _productRepository;

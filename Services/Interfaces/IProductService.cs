@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace E_Trade.Services.Interfaces
 {
+    /* Hizmet (Service) Tanımlama
+       Öncelikle, bir hizmet sınıfı oluşturuyoruz.*/
     public interface IProductService
     {
         List<Product> GetProducts();

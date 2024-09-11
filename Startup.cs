@@ -39,7 +39,13 @@ namespace E_Trade
 
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
+
+            /*Dependency Injection'ý Yapýlandýrma
+              Startup.cs dosyasýnda, ConfigureServices metodu içerisinde
+              baðýmlýlýk enjeksiyonunu yapýlandýrýyoruz*/
             services.AddScoped<IProductService, ProductServices>();
+
+
             services.AddScoped<ICartService, CartService>();
 
 
@@ -49,8 +55,6 @@ namespace E_Trade
             services.AddSession();
 
         }
-
-        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -60,7 +64,7 @@ namespace E_Trade
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

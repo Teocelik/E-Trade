@@ -21,8 +21,6 @@ namespace E_Trade.Controllers
             StripeConfiguration.ApiKey = _stripeSettings.Value.SecretKey;
         }
 
-
-
         public IActionResult Index()
         {
             return View();
@@ -52,7 +50,6 @@ namespace E_Trade.Controllers
                 CancelUrl = domain + $"CheckOut/Login"
             };
 
-
             foreach(var item in cart.Items)
             {
                 var sessionLineItems = new SessionLineItemOptions
@@ -71,7 +68,6 @@ namespace E_Trade.Controllers
                 };
                 options.LineItems.Add(sessionLineItems);
             }
-
 
             var service = new SessionService();
 
